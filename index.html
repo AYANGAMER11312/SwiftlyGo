@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="chatgpt-removebg-preview.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SwiftlyGo</title>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a; /* Light Black Background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Rainbow Animated Logo */
+        .logo {
+            font-size: 85px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            background: linear-gradient(
+                to right, 
+                #4285F4, #EA4335, #FBBC05, #34A853, #4285F4, #EA4335
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow_animation 3s linear infinite;
+            cursor: default;
+            user-select: none;
+        }
+
+        @keyframes rainbow_animation {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .search-container {
+            width: 90%;
+            max-width: 580px;
+            text-align: center;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 18px;
+            border: 1px solid #333;
+            border-radius: 30px;
+            outline: none;
+            background-color: #2d2d2d;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: 0.3s;
+            box-sizing: border-box; /* Galti Fix: Padding bar-bar nahi hogi */
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 1px 15px rgba(66, 133, 244, 0.4);
+            border-color: #4285F4;
+        }
+
+        .buttons-container {
+            margin-top: 25px;
+        }
+
+        .btn {
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #e8eaed;
+            font-size: 14px;
+            margin: 11px 4px;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #444;
+            border-color: #555;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Footer Section */
+        .footer {
+            position: absolute; /* Galti Fix: Mobile keyboard se footer upar nahi ayega */
+            bottom: 25px;
+            text-align: center;
+            color: #9aa0a6;
+            font-size: 15px;
+            width: 100%;
+        }
+
+        .made-by {
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .contact-text {
+            color: #9aa0a6;
+        }
+
+        .email-link {
+            color: #4285F4;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+            color: #8ab4f8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo">SwiftlyGo</div>
+
+    <div class="search-container">
+        <input type="text" id="user-query" class="search-bar" placeholder="Enter search anything..." onkeydown="if(event.key === 'Enter') startSearch()">
+        
+        <div class="buttons-container">
+            <button class="btn" onclick="startSearch()">Swiftly Search</button>
+            <button class="btn" onclick="luckySearch()">I'm Feeling Lucky</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="made-by">Made with Ayan Sumalani</p>
+        <span class="contact-text">Contact us: </span>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=OfficialSwiftlyGo@gmail.com" target="_blank" class="email-link">OfficialSwiftlyGo@gmail.com</a>
+    </div>
+
+    <script>
+        function startSearch() {
+            let query = document.getElementById('user-query').value.trim();
+            
+            if (query !== "") {
+                // Website check karne ka logic
+                const isWebsite = /^([a-z0-9-]+\.)+[a-z]{2,6}(\/.*)?$/i.test(query);
+
+                if (isWebsite) {
+                    let url = query.startsWith('http') ? query : 'https://' + query;
+                    window.location.href = url;
+                } else {
+                    window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(query);
+                }
+            } else {
+                alert("Please type something to search!");
+            }
+        }
+
+        function luckySearch() {
+            const query = document.getElementById('user-query').value;
+            if (query.trim() !== "") {
+                window.location.href = "https://www.google.com/search?btnI=1&q=" + encodeURIComponent(query);
+            } else {
+                window.location.href = "https://www.google.com/doodles";
+            }
+        }
+    </script>
+
+</body>
+</html>

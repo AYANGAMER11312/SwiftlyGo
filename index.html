@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="google-site-verification" content="abc123xyz" />
     <link rel="icon" type="image/png" sizes="32x32" href="chatgpt-removebg-preview.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,7 +12,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #1a1a1a; /* Light Black Background */
+            background-color: #1a1a1a; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -19,11 +20,12 @@
             height: 100vh;
             width: 100%;
             overflow: hidden;
+            box-sizing: border-box;
         }
 
         /* Rainbow Animated Logo */
         .logo {
-            font-size: 85px;
+            font-size: 85px; /* Desktop size */
             font-weight: bold;
             margin-bottom: 30px;
             letter-spacing: -2px;
@@ -37,6 +39,7 @@
             animation: rainbow_animation 3s linear infinite;
             cursor: default;
             user-select: none;
+            text-align: center;
         }
 
         @keyframes rainbow_animation {
@@ -48,6 +51,7 @@
             width: 90%;
             max-width: 580px;
             text-align: center;
+            padding: 0 10px;
         }
 
         .search-bar {
@@ -61,7 +65,7 @@
             color: white;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: 0.3s;
-            box-sizing: border-box; /* Galti Fix: Padding bar-bar nahi hogi */
+            box-sizing: border-box;
         }
 
         .search-bar:focus {
@@ -71,6 +75,10 @@
 
         .buttons-container {
             margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap; /* Mobile par buttons ek ke niche ek aa jayenge */
         }
 
         .btn {
@@ -79,11 +87,11 @@
             border-radius: 6px;
             color: #e8eaed;
             font-size: 14px;
-            margin: 11px 4px;
-            padding: 12px 24px;
+            padding: 12px 20px;
             cursor: pointer;
             transition: 0.2s;
             font-weight: bold;
+            min-width: 140px;
         }
 
         .btn:hover {
@@ -93,14 +101,36 @@
             transform: translateY(-2px);
         }
 
+        /* Mobile Responsive Settings */
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 50px; /* Mobile par logo chota kar diya */
+                margin-bottom: 20px;
+            }
+            .search-bar {
+                font-size: 16px;
+                padding: 12px 20px;
+            }
+            .btn {
+                width: 100%; /* Mobile par buttons full width honge */
+                margin: 5px 0;
+            }
+            .footer {
+                font-size: 12px;
+                bottom: 15px;
+            }
+        }
+
         /* Footer Section */
         .footer {
-            position: absolute; /* Galti Fix: Mobile keyboard se footer upar nahi ayega */
+            position: absolute; 
             bottom: 25px;
             text-align: center;
             color: #9aa0a6;
             font-size: 15px;
             width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
         }
 
         .made-by {
@@ -109,20 +139,11 @@
             margin-bottom: 5px;
         }
 
-        .contact-text {
-            color: #9aa0a6;
-        }
-
         .email-link {
             color: #4285F4;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .email-link:hover {
-            text-decoration: underline;
-            color: #8ab4f8;
+            word-break: break-all; /* Mobile par email lambi ho toh break ho jaye */
         }
     </style>
 </head>
@@ -131,7 +152,7 @@
     <div class="logo">SwiftlyGo</div>
 
     <div class="search-container">
-        <input type="text" id="user-query" class="search-bar" placeholder="Enter search anything..." onkeydown="if(event.key === 'Enter') startSearch()">
+        <input type="text" id="user-query" class="search-bar" placeholder="Search anything..." onkeydown="if(event.key === 'Enter') startSearch()">
         
         <div class="buttons-container">
             <button class="btn" onclick="startSearch()">Swiftly Search</button>
@@ -148,11 +169,8 @@
     <script>
         function startSearch() {
             let query = document.getElementById('user-query').value.trim();
-            
             if (query !== "") {
-                // Website check karne ka logic
                 const isWebsite = /^([a-z0-9-]+\.)+[a-z]{2,6}(\/.*)?$/i.test(query);
-
                 if (isWebsite) {
                     let url = query.startsWith('http') ? query : 'https://' + query;
                     window.location.href = url;
@@ -173,6 +191,5 @@
             }
         }
     </script>
-
 </body>
 </html>
